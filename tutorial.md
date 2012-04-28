@@ -100,9 +100,6 @@ The following exercises make up this hands-on lab:
 
 1. Using the Windows Identity Foundation with a WCF Service in Windows Azure
 
-1. Adding Diagnostics and Load Balancing
-
-1. Deploying the WCF Service to Windows Azure
 
  
 > **Note:** Inside each exercise you will find an **end** folder where you find the resulting solution you should obtain after completing the exercises. You can use this solution as a guide if you need additional help working through the exercises.
