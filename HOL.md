@@ -606,27 +606,6 @@ In this task you will update the WCF Weather Service to use the HTTPS endpoint.
 </system.serviceModel>
 ````
 
-	(Code Snippet - _WebServicesAndIdentityInTheCloud Lab - Ex01 Remove ws2007FederationHttpBinding_)
-````XML
-<system.serviceModel>
-   ...
-    <bindings>
-        <ws2007FederationHttpBinding>
-            <binding name="RelyingParty.IWeatherService_ws2007FederationHttpBinding">
-                <security mode="Message">
-                    <message>
-                        <issuerMetadata address="https://localhost/LocalSTS/Service.svc/mex" />
-                        <claimTypeRequirements>
-                            <add claimType="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name" isOptional="true" />
-                            <add claimType="http://schemas.microsoft.com/ws/2008/06/identity/claims/role" isOptional="true" />
-                        </claimTypeRequirements>
-                    </message>
-                </security>
-            </binding>
-        </ws2007FederationHttpBinding>
-    </bindings>
-</system.serviceModel>
-````
 
 	>**Note:** The main reason for which we need a custom binding is that we want to set the attribute **requireSecurityContextCancellation** of the **\<security>** element to false hence moving to cookie mode. This will allow you, later in the lab, to take control of the session token and accommodate its processing to the load balanced environment of Windows Azure.
 
@@ -642,14 +621,13 @@ In this task you will update the WCF Weather Service to use the HTTPS endpoint.
 	
 	````
 
-1. Remove the hardcoded address created by Federation Utility from the endpoint configuration. To do this, replace the endpoint element with the one highlighted below:
+1. Remove the hardcoded address created by Federation Utility from the endpoint configuration. To do this, replace the endpoint element with the one below:
 	<!-- strike:4 -->
 	````XML
 	<system.serviceModel>
 	  <services>
 	    <service name="RelyingParty.WeatherService" behaviorConfiguration="RelyingParty.WeatherServiceBehavior">
-	      <endpoint address="https://{yourProjectName}.cloudapp.net/" binding="ws2007FederationHttpBinding" contract="RelyingParty.IWeatherService" bindingConfiguration="RelyingParty.IWeatherService_ws2007FederationHttpBinding" />
-	      <endpoint address="" binding="customBinding" contract="RelyingParty.IWeatherService" bindingConfiguration="RelyingParty.IWeatherService" />
+	      	      <endpoint address="" binding="customBinding" contract="RelyingParty.IWeatherService" bindingConfiguration="RelyingParty.IWeatherService" />
 	
 	        ...
 	      </service>
@@ -789,11 +767,6 @@ In order to verify that you have performed every step in the exercise correctly,
 	                                </AppliesTo>
 	                                <trust:SecondaryParameters xmlns:trust="http://docs.oasis-open.org/ws-sx/ws-trust/200512">
 	 ...
-	                                     <AppliesTo xmlns="http://schemas.xmlsoap.org/ws/2004/09/policy">
-	                                         <EndpointReference xmlns="http://www.w3.org/2005/08/addressing">
-	                                         <Address>https://{yourprojectname}.cloudapp.net/</Address>
-	                                         </EndpointReference>
-	                                    </AppliesTo>
 	                                </trust:SecondaryParameters>
 	                            </additionalRequestParameters>
 	                        </issuedTokenParameters>
