@@ -572,7 +572,7 @@ In this task you will update the WCF Weather Service to use the HTTPS endpoint.
 
 	(Code Snippet - _WebServicesAndIdentityInTheCloud Lab - Ex01 CustomBinding_)
 
-````XML
+	````XML
 <system.serviceModel>
    ...
     <bindings>
@@ -604,8 +604,7 @@ In this task you will update the WCF Weather Service to use the HTTPS endpoint.
         </customBinding>
     </bindings>
 </system.serviceModel>
-````
-
+	````
 
 	>**Note:** The main reason for which we need a custom binding is that we want to set the attribute **requireSecurityContextCancellation** of the **\<security>** element to false hence moving to cookie mode. This will allow you, later in the lab, to take control of the session token and accommodate its processing to the load balanced environment of Windows Azure.
 
