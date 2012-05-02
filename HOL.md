@@ -766,7 +766,7 @@ In order to verify that you have performed every step in the exercise correctly,
 	                                    </EndpointReference>
 	                                </AppliesTo>
 	                                <trust:SecondaryParameters xmlns:trust="http://docs.oasis-open.org/ws-sx/ws-trust/200512">
-	 ...
+	                                ...
 	                                </trust:SecondaryParameters>
 	                            </additionalRequestParameters>
 	                        </issuedTokenParameters>
