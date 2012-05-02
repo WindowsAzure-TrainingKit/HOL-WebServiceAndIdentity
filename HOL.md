@@ -571,7 +571,7 @@ In this task you will update the WCF Weather Service to use the HTTPS endpoint.
 1. The wizard configured the service to use **ws2007FederationHttpBinding**, however we need to exercise more control in the way in which we handle messages. Remove the current **ws2007FederationHttpBinding** section inside bindings and add the following custom binding. Remember to update **{yourprojectname}** label with your Windows Azure Hosted Service name.
 
 	(Code Snippet - _WebServicesAndIdentityInTheCloud Lab - Ex01 CustomBinding_)
-<!-- strike:30-42 -->
+
 ````XML
 <system.serviceModel>
    ...
@@ -748,7 +748,7 @@ In order to verify that you have performed every step in the exercise correctly,
 1. Open the **app.config** file inside the **Client** project.
 
 1. Move the **AppliesTo** element from the **trust:SecondaryParameters** section to **additionalRequestParameters**. Remember to update **{yourprojectname}** label with your Windows Azure Hosted Service name.
-	<!-- strike:18-22;mark:11-15 -->
+
 	````XML
 	<system.serviceModel>
 	    <bindings>
