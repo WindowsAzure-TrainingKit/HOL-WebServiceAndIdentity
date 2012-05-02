@@ -602,6 +602,15 @@ In this task you will update the WCF Weather Service to use the HTTPS endpoint.
                 <httpsTransport />
             </binding>
         </customBinding>
+    </bindings>
+</system.serviceModel>
+````
+
+	(Code Snippet - _WebServicesAndIdentityInTheCloud Lab - Ex01 Remove ws2007FederationHttpBinding_)
+````XML
+<system.serviceModel>
+   ...
+    <bindings>
         <ws2007FederationHttpBinding>
             <binding name="RelyingParty.IWeatherService_ws2007FederationHttpBinding">
                 <security mode="Message">
