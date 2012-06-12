@@ -1,6 +1,6 @@
-In order to run the End solution of this sample, the following steps are required:
+In order to run this End solution, the following steps are required:
 
-1. Perform all the steps in the getting started of the lab.
+1. Perform all the steps in the Getting Started of the lab.
 2. Replace the following placeholders in all solutions:
         - {yourProjectName}, with the name you use for the certificate and the azure project (eg. foo)
         - {yourCertificateThumbprint}, with the thumbprint of the certificate you creating during the getting started (eg:939026E4657552526F49AA868DEA80F788991A73 ) 

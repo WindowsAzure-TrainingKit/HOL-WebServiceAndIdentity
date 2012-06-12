@@ -9,6 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csp
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "LocalSTS", "https://localhost/LocalSTS", "{483271C8-2FAE-4480-B654-D3F1222D9927}"
 	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "false"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
 		Debug.AspNetCompiler.VirtualPath = "/LocalSTS"
 		Debug.AspNetCompiler.PhysicalPath = "..\..\..\..\..\..\..\..\inetpub\wwwroot\LocalSTS\"
