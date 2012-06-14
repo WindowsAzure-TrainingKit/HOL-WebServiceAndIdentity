@@ -19,6 +19,22 @@ using System.ServiceModel;
 
 namespace RelyingParty
 {
+    [DataContract]
+    public enum Weather
+    {
+        [EnumMember]
+        Sunny,
+
+        [EnumMember]
+        Cloudy,
+
+        [EnumMember]
+        Snowy,
+
+        [EnumMember]
+        Rainy
+    }
+
     [ServiceContract]
     [ServiceKnownType(typeof(WeatherInfo))]
     public interface IWeatherService
@@ -38,21 +54,5 @@ namespace RelyingParty
 
         [DataMember]
         public string Observatory { get; set; }
-    }
-
-    [DataContract]
-    public enum Weather
-    {
-        [EnumMember]
-        Sunny,
-
-        [EnumMember]
-        Cloudy,
-
-        [EnumMember]
-        Snowy,
-
-        [EnumMember]
-        Rainy
     }
 }
