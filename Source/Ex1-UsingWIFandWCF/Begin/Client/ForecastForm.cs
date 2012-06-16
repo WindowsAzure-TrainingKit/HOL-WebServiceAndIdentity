@@ -27,7 +27,6 @@ namespace Client
 {
     public partial class ForecastForm : Form
     {
-        
         public ForecastForm()
         {
             this.InitializeComponent();
@@ -55,7 +54,6 @@ namespace Client
 
         private void ShowForecast(int days, int zipCode)
         {
-
         }
     }
 }

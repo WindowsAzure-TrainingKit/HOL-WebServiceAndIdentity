@@ -25,12 +25,12 @@ namespace RelyingParty
     {
         public WeatherInfo GetThreeDaysForecast(int zipCode)
         {
-            return GetForecast(3, zipCode);
+            return this.GetForecast(3, zipCode);
         }
 
         public WeatherInfo GetTenDaysForecast(int zipCode)
         {
-            return GetForecast(10, zipCode);
+            return this.GetForecast(10, zipCode);
         }
 
         protected WeatherInfo GetForecast(int days, int zipCode)
@@ -52,7 +52,6 @@ namespace RelyingParty
 
             // Uncomment it to verify load balancing
             // System.Threading.Thread.Sleep(3 * 1000);
-
             return weatherInfo;
         }
     }
