@@ -146,7 +146,7 @@ To do this, you will execute a script provided as part of the assets of the Lab.
 
 1. Close the command prompt.
 
-<a name="GettingStartedTask1" />
+<a name="GettingStartedTask2" />
 #### Task 2 - Creating the Local STS ####
 
 Exercises in this lab need an STS to which you can outsource authentication to. You may have access to some local identity provider, for example your company's instance of ADFSv2, however that is not always the case. In order to ensure that you can successfully go through the lab without dependencies, we will make sure that you have access to a suitable identity provider by giving you instructions to create your own development time STS, hosted in your local IIS. WIF makes the task extremely easy, by providing a WCF project template which already contains most of the plumbing you need. Note that the STS you are building here can be used with on-premises services just as well.
