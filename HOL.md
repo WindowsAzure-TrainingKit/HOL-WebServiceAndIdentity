@@ -1,9 +1,9 @@
-﻿<a name="HOLTitle" />
+﻿<a name="HOLTitle"></a>
 # Web Services and Identity in Windows Azure #
 
 ---
 
-<a name="Overview" />
+<a name="Overview"></a>
 ## Overview ##
 
 Windows Identity Foundation can simplify access to your Windows Communication Foundation (WCF) services, by providing the usual claims-based identity arsenal of good practices: authentication externalization, location independence, decoupling from credential types and many others. There is no reason for you not to enjoy the same advantages when you host your WCF services in Windows Azure: there are few practicalities that are intrinsic to the hosting platform, but the steps you need to follow are largely the same whether you are deploying your services on-premises or in the cloud. If you want to be fully aware of the differences between the two cases, you can optionally go through the lab "Web Services and Identity for Visual Studio 2010 Developers" from the [Identity Training Course](http://msdn.microsoft.com/en-us/IdentityTrainingCourse) and learn about how to use WCF and WIF on-premises before starting the current lab: please note that it is entirely optional, as this HOL is self-contained and independent.
@@ -26,7 +26,7 @@ The first lab will show you the process to configure a weather service to trust 
  
 _A visual summary of what you will build in this lab_
 
-<a name="Objectives" />
+<a name="Objectives"></a>
 ### Objectives ###
 
 In this hands-on lab, you will learn how to:
@@ -38,7 +38,7 @@ In this hands-on lab, you will learn how to:
 - Provide custom SecurityTokenHandler and ServiceBehavior classes for enabling a WCF service to take advantage of load balancers
 - Deploy to the Windows Azure staging and production evnironments a WCF service secured via WIF
 
-<a name="Prerequisites" />
+<a name="Prerequisites"></a>
 ### Prerequisites ###
 
 You must have the following items to complete this lab:
@@ -49,10 +49,11 @@ You must have the following items to complete this lab:
 - [Windows Azure Tools for Microsoft Visual Studio 1.7](http://www.microsoft.com/windowsazure/sdk/)
 - [Microsoft© Windows Identity Foundation Runtime](http://support.microsoft.com/kb/974405)
 - [Microsoft© Windows Identity Foundation SDK](http://www.microsoft.com/downloads/details.aspx?FamilyID=c148b2df-c7af-46bb-9162-2c9422208504)
+- A Windows Azure subscription - [sign up for a free trial](http://aka.ms/WATK-FreeTrial)
 
 >**Note:** This lab was designed to use Windows 7 Operating System.
 
-<a name="Setup" />
+<a name="Setup"></a>
 ### Setup ###
 
 In order to execute the exercises in this hands-on lab you need to set up your environment.
@@ -80,14 +81,14 @@ In order to execute the exercises in this hands-on lab you need to set up your e
 > When you first start Visual Studio, you must select one of the predefined settings collections. Every predefined collection is designed to match a particular development style and determines window layouts, editor behavior, IntelliSense code snippets, and dialog box options. The procedures in this lab describe the actions necessary to accomplish a given task in Visual Studio when using the **General Development Settings** collection. If you choose a different settings collection for your development environment, there may be differences in these procedures that you need to take into account.
 
  
-<a name="CodeSnippets" />
+<a name="CodeSnippets"></a>
 ### Using the Code Snippets ###
 
 Throughout the lab document, you will be instructed to insert code blocks. For your convenience, most of that code is provided as Visual Studio Code Snippets, which you can use from within Visual Studio 2010 to avoid having to add it manually. 
 
 ---
 
-<a name="Exercises" />
+<a name="Exercises"></a>
 ## Exercises ##
 
 The following exercises make up this hands-on lab:
@@ -100,10 +101,10 @@ The following exercises make up this hands-on lab:
 Estimated time to complete this lab: **60 minutes**
 
 
-<a name="GettingStarted" />
+<a name="GettingStarted"></a>
 ## Getting Started: Setting up the Certificates and Local STS ##
 
-<a name="GettingStartedTask1" />
+<a name="GettingStartedTask1"></a>
 #### Task 1 - Generating the Required Certificates ####
 
 During this task, you will create an X.509 certificate used by the service you will implement in the Exercises of this lab. Your service will need a certificate in order to be able to publish endpoints on a SSL channel; the same certificate will be used for handling token encryption and decryption. Windows Azure expects to find X.509 certificates for cloud solutions in specific stores, hence it will be necessary to register your service certificate accordingly.
@@ -146,7 +147,7 @@ To do this, you will execute a script provided as part of the assets of the Lab.
 
 1. Close the command prompt.
 
-<a name="GettingStartedTask2" />
+<a name="GettingStartedTask2"></a>
 #### Task 2 - Creating the Local STS ####
 
 Exercises in this lab need an STS to which you can outsource authentication to. You may have access to some local identity provider, for example your company's instance of ADFSv2, however that is not always the case. In order to ensure that you can successfully go through the lab without dependencies, we will make sure that you have access to a suitable identity provider by giving you instructions to create your own development time STS, hosted in your local IIS. WIF makes the task extremely easy, by providing a WCF project template which already contains most of the plumbing you need. Note that the STS you are building here can be used with on-premises services just as well.
@@ -237,14 +238,14 @@ Exercises in this lab need an STS to which you can outsource authentication to. 
 
 1. Press **Ctrl + S** to save the **Web.config** file and close it.
 
-<a name="Exercise1" />
+<a name="Exercise1"></a>
 ### Exercise 1: Using Windows Identity Foundation with a WCF Service in Windows Azure ###
 
 This exercise will walk you through the process of creating a WCF role, configure its service to trust an on-premises development STS, attach a client and run the entire solution in the Compute Emulator. This is easily accomplished with only minor modifications to the procedure you would have followed for obtaining the same result on premises. The main changes accommodate the fact that in Windows Azure a service is hosted at different addresses according to the environment (local, staging, production), a situation you would have to deal with in any multi-staged environment.
 
 You will start in Task 1 by implementing a simple weather service and testing its behavior without authentication using a client provided by the lab. Afterwards in Task 2, you will use WIF tooling to establish a trust relationship between the weather service and a local STS, by configuring the WCF service binding and behaviors collection in a way that will make the service require tokens from LocalSTS from all its future callers. Then in Task 3 and 4, you will set up an HTTPS secure endpoint between the WCF service and the STS using an X.509 certificate, using the Windows Azure Visual Studio tooling UI for associating it to the RelyingParty WCF Service Role. You will also enable the weather service HTTPS endpoint port. Finally in the verification, you will update the client to test the HTTPS endpoint of the weather service.
 
-<a name="Ex1Task1" />
+<a name="Ex1Task1"></a>
 #### Task 1 - Implementing the Weather Service ####
 
 The sample Relying Party application you will build in this lab will simulate a service providing weather-related information, hosted on a WCF Role of Windows Azure. In this task, you will open a Windows Azure Project project with a WCF Role already created. Then, you will implement the Weather Service and verify its behavior using a client provided by the lab.
@@ -408,7 +409,7 @@ The sample Relying Party application you will build in this lab will simulate a 
 
 	Stop the WCF Service Web Role running on Compute Emulator from its UI. To do this, right-click the **Compute Emulator and Storage** icon on the **Windows' tray bar** and select **Show Compute Emulator UI**. In the tree at the left panel, right-click the current deployment and select **Remove**.
 
-<a name="Ex1Task2" />
+<a name="Ex1Task2"></a>
 #### Task 2 - Establishing a Trust Relationship between the WCF Service and the Development STS ####
 
 Now that we have the WCF service running and the STS, it's time to establish a trust relationship between them. In practical terms, that means that the WCF service binding and behaviors collection will be configured in a way that will make the service require tokens from LocalSTS from all its future callers. The bulk of the task will be performed by the WIF tooling, and specifically the **Add STS Reference** wizard (which in turn is the Visual Studio integration of **fedutil.exe**, a standalone tool provided in the WIF SDK).
@@ -478,7 +479,7 @@ Now that we have the WCF service running and the STS, it's time to establish a t
 
 1. Check the Wizard summary, and press **Finish**.
 
-<a name="Ex1Task3" />
+<a name="Ex1Task3"></a>
 #### Task 3 - Adding the Certificates to the Relying Party ####
 
 In the following steps you are going to configure the certificate created on the [Getting Started: Setting up the Certificates and Local STS](#segment1) section, using the Windows Azure Visual Studio tooling UI for associating it to the RelyingParty WCF Service Role.
@@ -516,7 +517,7 @@ In the following steps you are going to configure the certificate created on the
 
 1. Close the **RelyingParty Role** property page.
 
-<a name="Ex1Task4" />
+<a name="Ex1Task4"></a>
 #### Task 4 - Configuring the WCF Service HTTPS Endpoint ####
 
 In this task you will update the WCF Weather Service to use the HTTPS endpoint.
@@ -718,7 +719,7 @@ In this task you will update the WCF Weather Service to use the HTTPS endpoint.
 
 1. Press **Ctrl + S** to save the **WeatherService.svc.cs** file and close it.
 
-<a name="Verification" />
+<a name="Verification"></a>
 #### Verification ####
 
 Your service is finally ready to run using the certificates. You will now update the client to consume the project using the HTTPS encrypted endpoint.
@@ -799,7 +800,7 @@ In order to verify that you have performed every step in the exercise correctly,
 
 ----
 
-<a name="Summary" />
+<a name="Summary"></a>
 ## Summary ##
 
 Taking advantage of existing identities in new applications is one of the fundamental requirements in today's distributed systems, and the new wave of cloud based services is no exception.
