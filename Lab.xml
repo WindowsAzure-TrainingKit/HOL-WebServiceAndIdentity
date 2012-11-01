@@ -11,7 +11,7 @@
   <Description>In this hands-on lab, you will learn how to use claims-based identity for handling authentication and access management for your WCF services hosted in Windows Azure.</Description>
   <Document ConversionType="Html">HOL.md</Document>
   <Title>Web Services and Identity in Windows Azure</Title>
-  <Version>1.0.2</Version>
+  <Version>1.0.3</Version>
   <Source>.\Source</Source>
   <DependencyChecker>.\source\Setup\Dependencies.depi</DependencyChecker>
   <CustomProperties>
