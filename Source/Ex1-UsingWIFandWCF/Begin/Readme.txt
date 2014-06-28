@@ -1,1 +1,0 @@
-In order to start working with this Begin solution, perform all the steps in the Getting Started section of the lab first.
